@@ -46,7 +46,7 @@ namespace StudentManagementSystem
         private List<Student> students = new List<Student>();
 
 
-        static void Main(string[] args)
+        public void Main(string[] args)
         {
             Program program = new Program();
             program.Run();
