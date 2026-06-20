@@ -1,88 +1,4 @@
-using System;
-using System.Collections.Generic;
- 
-namespace StudentManagementSystem
-{
-    class Student
-    {
-        private string name;
-        private List<int> grades;
- 
-        public Student(string name, List<int> grades)
-        {
-            this.name = name;
-            this.grades = grades;
-        }
- 
-        public string GetName()
-        {
-            return name;
-        }
- 
-        public List<int> GetGrades()
-        {
-            return grades;
-        }
- 
-        public double GetAverage()
-        {
-            if (grades.Count == 0)
-                return 0;
- 
-            double sum = 0;
- 
-            foreach (int grade in grades)
-            {
-                sum += grade;
-            }
- 
-            return sum / grades.Count;
-        }
-    }
- 
-    class Program
-    {
-        static List<Student> students = new List<Student>();
- 
-        static void Main(string[] args)
-        {
-            bool running = true;
- 
-            while (running)
-            {
-                DisplayMenu();
-                int choice = GetMenuChoice();
- 
-                if (choice == 1)
-                {
-                    AddStudent();
-                }
-                else if (choice == 2)
-                {
-                    ViewAllStudents();
-                }
-                else if (choice == 3)
-                {
-                    ComputeAvgGrades();
-                }
-                else if (choice == 4)
-                {
-                    FindHighestGrade();
-                }
-                else if (choice == 5)
-                {
-                    running = false;
-                    Console.WriteLine("Exiting Program...");
-                    Console.WriteLine("Goodbye!");
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Choice. Choose 1-5 only.\n");
-                }
-            }
-        }
- 
-        static void DisplayMenu()
+public void DisplayMenu()
         {
             Console.WriteLine("===== STUDENT SYSTEM =====");
             Console.WriteLine("1. Add Student");
@@ -93,8 +9,8 @@ namespace StudentManagementSystem
             Console.WriteLine("==========================");
             Console.Write("Choose an option: ");
         }
- 
-        static int GetMenuChoice()
+
+        public int GetMenuChoice()
         {
             string input = Console.ReadLine();
             try
@@ -106,35 +22,32 @@ namespace StudentManagementSystem
                 return 0;
             }
         }
- 
-        static void AddStudent()
+
+        public void AddStudent()
         {
             Console.WriteLine();
- 
+
             Console.Write("Enter student name: ");
             string name = Console.ReadLine();
- 
+
             List<int> grades = new List<int>();
- 
+
             Console.Write("Enter grade 1: ");
-            int grade1 = int.Parse(Console.ReadLine());
-            grades.Add(grade1);
- 
+            grades.Add(int.Parse(Console.ReadLine()));
+
             Console.Write("Enter grade 2: ");
-            int grade2 = int.Parse(Console.ReadLine());
-            grades.Add(grade2);
- 
+            grades.Add(int.Parse(Console.ReadLine()));
+
             Console.Write("Enter grade 3: ");
-            int grade3 = int.Parse(Console.ReadLine());
-            grades.Add(grade3);
- 
+            grades.Add(int.Parse(Console.ReadLine()));
+
             Student student = new Student(name, grades);
             students.Add(student);
- 
+
             Console.WriteLine("Student added successfully!\n");
         }
- 
-        static void ViewAllStudents()
+
+        public void ViewAllStudents()
         {
             Console.WriteLine();
             if (students.Count == 0)
@@ -142,9 +55,9 @@ namespace StudentManagementSystem
                 Console.WriteLine("No student in the system.\n");
                 return;
             }
- 
+
             Console.WriteLine("======= ALL STUDENTS ======");
- 
+
             foreach (Student student in students)
             {
                 Console.WriteLine($"Name: {student.GetName()}");
@@ -153,8 +66,8 @@ namespace StudentManagementSystem
                 Console.WriteLine();
             }
         }
- 
-        static void ComputeAvgGrades()
+
+        public void ComputeAvgGrades()
         {
             Console.WriteLine();
             if (students.Count == 0)
@@ -162,20 +75,20 @@ namespace StudentManagementSystem
                 Console.WriteLine("No student in the system.\n");
                 return;
             }
- 
+
             double totalAverage = 0;
             foreach (Student student in students)
             {
                 totalAverage += student.GetAverage();
             }
- 
+
             double classAverage = totalAverage / students.Count;
- 
+
             Console.WriteLine("===== CLASS AVERAGE =====");
             Console.WriteLine($"Overall Average Grade: {classAverage:F2}\n");
         }
- 
-        static void FindHighestGrade()
+
+        public void FindHighestGrade()
         {
             Console.WriteLine();
             if (students.Count == 0)
@@ -183,10 +96,10 @@ namespace StudentManagementSystem
                 Console.WriteLine("No student in the system.\n");
                 return;
             }
- 
+
             Student topStudent = null;
             int highestGrade = -1;
- 
+
             foreach (Student student in students)
             {
                 foreach (int grade in student.GetGrades())
@@ -198,7 +111,7 @@ namespace StudentManagementSystem
                     }
                 }
             }
- 
+
             Console.WriteLine("===== HIGHEST GRADE =====");
             Console.WriteLine($"Top Student: {topStudent.GetName()}");
             Console.WriteLine($"Highest Grade: {highestGrade}\n");
